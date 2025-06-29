@@ -1,12 +1,11 @@
 import { motion } from 'framer-motion';
 import Hero from '../components/Hero';
-import About from '../components/About';
-import Services from '../components/Services';
 import WhyChoose from '../components/WhyChoose';
 import Team from '../components/Team';
 import Testimonials from '../components/Testimonials';
 import Resources from '../components/Resources';
 import Contact from '../components/Contact';
+import Services from './Services';
 
 const Home = () => {
   return (
@@ -16,7 +15,8 @@ const Home = () => {
       transition={{ duration: 0.5 }}
     >
       <Hero />
-      <About />
+      {/* <About /> */}
+      <div className='-pt-20'></div>
       <Services />
       <WhyChoose />
       <Team />

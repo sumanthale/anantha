@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Menu, X, Phone, Calendar } from "lucide-react";
+import { Menu, X, Phone, Calendar, Sparkles } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link, useLocation } from "react-router-dom";
 import DarkModeToggle from "./DarkModeToggle";
@@ -20,7 +20,7 @@ const Header = () => {
   const navItems = [
     { name: "Home", href: "/" },
     { name: "About", href: "/about" },
-    { name: "Services", href: "/#services" },
+    { name: "Services", href: "/services" },
     { name: "Team", href: "/#team" },
     { name: "Blog", href: "/blog" },
     { name: "Contact", href: "/contact" },
@@ -30,16 +30,16 @@ const Header = () => {
     if (href === "/") return location.pathname === "/";
     if (href.startsWith("/#"))
       return location.pathname === "/" && location.hash === href.substring(1);
-    return location.pathname === href;
+    return location.pathname === href || location.pathname.startsWith(href + "/");
   };
 
   return (
     <motion.header
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+     className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled
-          ? "bg-white/90 dark:bg-dark-bg/90 backdrop-blur-md shadow-md"
+          ? "bg-glass-white dark:bg-glass-dark backdrop-blur-xl shadow-glass"
           : "bg-transparent"
       }`}
     >
@@ -79,21 +79,28 @@ const Header = () => {
           </nav>
 
           {/* CTA Buttons & Dark Mode Toggle */}
-          <div className="hidden lg:flex items-center space-x-4">
+         <div className="hidden lg:flex items-center space-x-4">
             <DarkModeToggle />
-            <a
+            
+            <motion.a
               href="tel:+91-40-1234-5678"
-              className="flex items-center space-x-2 px-4 py-2 border border-primary-200 dark:border-primary-800 rounded-xl text-primary-600 dark:text-primary-400 hover:bg-primary-50 dark:hover:bg-primary-900/20 text-sm font-medium"
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.95 }}
+              className="flex items-center space-x-2 px-4 py-2 bg-glass-white dark:bg-glass-dark backdrop-blur-md border border-white/20 dark:border-white/10 rounded-xl text-primary-600 dark:text-primary-400 hover:shadow-glass text-sm font-medium transition-all duration-300"
             >
               <Phone className="w-4 h-4" />
               <span>Emergency</span>
-            </a>
-            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+            </motion.a>
+            
+            <motion.div 
+              whileHover={{ scale: 1.05, y: -2 }} 
+              whileTap={{ scale: 0.95 }}
+            >
               <Link
                 to="/contact"
-                className="flex items-center space-x-2 px-6 py-2.5 bg-gradient-to-r from-primary-600 to-plum-700 text-white rounded-xl hover:from-primary-700 hover:to-plum-800 shadow-lg text-sm font-medium"
+                className="flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-primary-600 to-plum-600 text-white rounded-xl hover:from-primary-700 hover:to-plum-700 shadow-glow hover:shadow-glow-lg text-sm font-medium transition-all duration-300"
               >
-                <Calendar className="w-4 h-4" />
+                <Sparkles className="w-4 h-4" />
                 <span>Book Consultation</span>
               </Link>
             </motion.div>
